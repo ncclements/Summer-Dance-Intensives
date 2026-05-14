@@ -1,0 +1,15 @@
+# Real config with payment handles and Apps Script URL — copy from config.example.js
+config.js
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node / tooling (in case anyone adds local helpers later)
+node_modules/
+.env
+.env.local

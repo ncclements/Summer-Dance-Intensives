@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Enroll · Summer Dance Intensives</title>
+  <meta name="description" content="Reserve your spot in Jessica Quinn's Summer Dance Intensives." />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="./">
+        <span class="brand-mark">JQ</span>
+        <span class="brand-text">Jessica Quinn Dance</span>
+      </a>
+      <nav aria-label="Primary">
+        <a class="nav-link" href="./">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="form-page">
+      <div class="container container-narrow">
+        <p class="eyebrow">Enrollment</p>
+        <h1>Reserve your spot</h1>
+        <p class="lead">Each class is $40. Pick any dates that work — you'll pay after you submit.</p>
+
+        <form id="enroll-form" novalidate>
+          <fieldset>
+            <legend>Student</legend>
+            <div class="field">
+              <label for="studentName">Student name</label>
+              <input id="studentName" name="studentName" type="text" autocomplete="name" required />
+              <p class="field-error" data-for="studentName"></p>
+            </div>
+            <div class="field">
+              <label for="grade">Grade (starting fall 2026)</label>
+              <select id="grade" name="grade" required>
+                <option value="">Choose…</option>
+                <option value="5">5th</option>
+                <option value="6">6th</option>
+                <option value="7">7th</option>
+                <option value="8">8th</option>
+                <option value="9">9th</option>
+                <option value="10">10th</option>
+                <option value="11">11th</option>
+                <option value="12">12th</option>
+              </select>
+              <p class="field-error" data-for="grade"></p>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Parent / guardian</legend>
+            <div class="field">
+              <label for="parentName">Your name</label>
+              <input id="parentName" name="parentName" type="text" autocomplete="name" required />
+              <p class="field-error" data-for="parentName"></p>
+            </div>
+            <div class="field">
+              <label for="parentEmail">Email</label>
+              <input id="parentEmail" name="parentEmail" type="email" autocomplete="email" inputmode="email" required />
+              <p class="field-help">We'll send your confirmation and payment links here.</p>
+              <p class="field-error" data-for="parentEmail"></p>
+            </div>
+            <div class="field">
+              <label for="parentPhone">Phone</label>
+              <input id="parentPhone" name="parentPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(555) 555-5555" required />
+              <p class="field-error" data-for="parentPhone"></p>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Classes</legend>
+            <p class="field-help">Mondays, 1–3 PM. Check the dates you want to book.</p>
+            <div id="class-picker" class="class-picker" aria-live="polite">
+              <div class="schedule-loading">Loading class availability…</div>
+            </div>
+            <p class="field-error" data-for="classes"></p>
+          </fieldset>
+
+          <div class="total-bar" aria-live="polite">
+            <span class="total-label">Total</span>
+            <span class="total-value"><span id="total-amount">$0</span> <span class="total-count" id="total-count">(0 classes selected)</span></span>
+          </div>
+
+          <p id="form-error" class="form-error" role="alert" hidden></p>
+
+          <button id="submit-btn" type="submit" class="btn btn-primary btn-lg btn-block" disabled>
+            <span class="btn-label">Reserve my spot</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+          <p class="fine-print">By submitting, you agree your dancer can participate in Jessica Quinn's Summer Dance Intensives. Payment is due before the first class.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>Jessica Quinn</strong> · Summer Dance Intensives</p>
+      <p>4227 Center St, Deer Park TX 77536 · Mondays 1–3 PM</p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

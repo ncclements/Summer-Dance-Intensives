@@ -1,0 +1,63 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Generate config.js from repository secrets so the deployed site has
+      # real values without committing them to the repo. Set these in
+      # GitHub → Settings → Secrets and variables → Actions:
+      #   APPS_SCRIPT_URL, PAYPAL_HANDLE, VENMO_HANDLE, CASHAPP_HANDLE,
+      #   ZELLE_CONTACT, INSTRUCTOR_CONTACT_EMAIL
+      - name: Generate config.js
+        env:
+          APPS_SCRIPT_URL:          ${{ secrets.APPS_SCRIPT_URL }}
+          PAYPAL_HANDLE:            ${{ secrets.PAYPAL_HANDLE }}
+          VENMO_HANDLE:             ${{ secrets.VENMO_HANDLE }}
+          CASHAPP_HANDLE:           ${{ secrets.CASHAPP_HANDLE }}
+          ZELLE_CONTACT:            ${{ secrets.ZELLE_CONTACT }}
+          INSTRUCTOR_CONTACT_EMAIL: ${{ secrets.INSTRUCTOR_CONTACT_EMAIL }}
+        run: |
+          cat > config.js <<EOF
+          window.CONFIG = {
+            APPS_SCRIPT_URL: "${APPS_SCRIPT_URL}",
+            PAYPAL_HANDLE:   "${PAYPAL_HANDLE}",
+            VENMO_HANDLE:    "${VENMO_HANDLE}",
+            CASHAPP_HANDLE:  "${CASHAPP_HANDLE}",
+            ZELLE_CONTACT:   "${ZELLE_CONTACT}",
+            INSTRUCTOR_NAME: "Jessica Quinn",
+            INSTRUCTOR_CONTACT_EMAIL: "${INSTRUCTOR_CONTACT_EMAIL}"
+          };
+          EOF
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
