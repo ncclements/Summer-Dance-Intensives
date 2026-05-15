@@ -113,13 +113,20 @@
         : spotsLabel(remaining);
       const spotCls = unknown ? 'spots' : spotsClass(remaining);
 
+      const parts = cls.date.split(' ');
+      const monthAbbrev = (parts[0] || '').slice(0, 3).toUpperCase();
+      const dayNum = parts[1] || cls.date;
+
       card.innerHTML = `
-        <div class="card-date">${cls.date}</div>
-        <div class="card-topic">${cls.topic}</div>
-        <div class="card-meta">
-          <span class="card-pricetag">${fmtMoney(PRICE_PER_CLASS)}</span>
-          <span class="${spotCls}">${spotText}</span>
+        <div class="card-day-col">
+          <span class="card-day-num">${dayNum}</span>
+          <span class="card-month">${monthAbbrev}</span>
         </div>
+        <div class="card-main">
+          <span class="card-topic">${cls.topic}</span>
+          <span class="card-time">1–3 PM · Monday</span>
+        </div>
+        <span class="${spotCls}">${spotText}</span>
       `;
       grid.appendChild(card);
     });
@@ -149,14 +156,22 @@
       const isFull = remaining <= 0;
       const id = 'cls-' + i;
 
+      const parts = cls.date.split(' ');
+      const monthAbbrev = (parts[0] || '').slice(0, 3).toUpperCase();
+      const dayNum = parts[1] || cls.date;
+
       const label = document.createElement('label');
       label.className = 'class-option' + (isFull ? ' is-full' : '');
       label.htmlFor = id;
       label.innerHTML = `
         <input type="checkbox" id="${id}" name="classes" value="${cls.date}" ${isFull ? 'disabled' : ''} />
+        <div class="opt-day-col">
+          <span class="opt-day-num">${dayNum}</span>
+          <span class="opt-month">${monthAbbrev}</span>
+        </div>
         <div class="opt-main">
-          <span class="opt-date">${cls.date}</span>
           <span class="opt-topic">${cls.topic}</span>
+          <span class="opt-time">1–3 PM · Monday</span>
         </div>
         <span class="${spotsClass(remaining)}">${spotsLabel(remaining)}</span>
       `;

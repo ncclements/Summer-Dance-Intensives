@@ -3,83 +3,77 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Summer Dance Intensives with Jessica Quinn</title>
-  <meta name="description" content="Six Monday intensives in Deer Park, TX. Stamina, leaps, turns, kicks, tricks. Grade 5 and up. $40 per class." />
+  <title>Jessica Quinn — Dance Intense</title>
+  <meta name="description" content="Six Monday afternoons in Deer Park, TX. Real technique. Real work. Built for dancers ready to push." />
+  <link rel="icon" type="image/png" href="assets/img/jq-dancer-mark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="./">
-        <span class="brand-mark">JQ</span>
-        <span class="brand-text">Jessica Quinn Dance</span>
+  <header class="site-nav">
+    <div class="site-nav__inner">
+      <a class="brand-link" href="./" aria-label="Jessica Quinn — Dance Intense, home">
+        <img class="brand-mark" src="assets/img/jq-dancer-mark.png" alt="" />
+        <span class="wordmark wordmark--mini" aria-hidden="true">
+          <span class="wordmark__top">JESSICA</span>
+          <span class="wordmark__rule"></span>
+          <span class="wordmark__bottom">Quinn</span>
+        </span>
       </a>
-      <nav aria-label="Primary">
+      <nav class="site-nav__links" aria-label="Primary">
+        <a class="nav-link" href="#schedule">Schedule</a>
         <a class="nav-cta" href="enroll.html">Enroll</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="container">
-        <p class="eyebrow">Summer 2026 · Deer Park, TX</p>
-        <h1>Summer Dance Intensives</h1>
-        <p class="hero-sub">Six Monday afternoons with Jessica Quinn. Build stamina, sharpen technique, push your range.</p>
-        <dl class="hero-facts">
-          <div><dt>When</dt><dd>Mondays · 1:00 – 3:00 PM</dd></div>
-          <div><dt>Where</dt><dd>4227 Center St, Deer Park TX 77536</dd></div>
-          <div><dt>Who</dt><dd>5th grade and up</dd></div>
-          <div><dt>Cost</dt><dd>$40 per class · book any or all</dd></div>
-        </dl>
-        <a class="btn btn-primary btn-lg" href="enroll.html">Enroll now</a>
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow hero__eyebrow">Summer 2026 · Deer Park, TX</p>
+      <img class="hero__mark" src="assets/img/jq-dancer-mark.png" alt="Jessica Quinn dance logo" />
+      <h1 class="wordmark wordmark--hero" id="hero-title">
+        <span class="wordmark__top">JESSICA</span>
+        <span class="wordmark__rule" aria-hidden="true"></span>
+        <span class="wordmark__bottom">Quinn</span>
+      </h1>
+      <p class="hero__tagline">Six Monday afternoons. Real technique. Real work. Built for dancers ready to push.</p>
+      <a class="cta-pill" href="enroll.html">Reserve a spot →</a>
+    </section>
+
+    <section class="info-strip" aria-label="Class basics">
+      <div class="info-strip__inner">
+        <div class="info-cell">
+          <p class="muted-label">When</p>
+          <p class="info-cell__value">Mondays · 1–3 PM</p>
+        </div>
+        <div class="info-cell">
+          <p class="muted-label">Who</p>
+          <p class="info-cell__value">5th grade &amp; up</p>
+        </div>
+        <div class="info-cell">
+          <p class="muted-label">Price</p>
+          <p class="info-cell__value">$40 per class</p>
+        </div>
       </div>
     </section>
 
-    <section class="how" aria-labelledby="how-heading">
-      <div class="container">
-        <h2 id="how-heading">How it works</h2>
-        <ol class="how-steps">
-          <li>
-            <span class="step-num">1</span>
-            <h3>Pick your dates</h3>
-            <p>Each Monday is its own class. Book one, a few, or all six.</p>
-          </li>
-          <li>
-            <span class="step-num">2</span>
-            <h3>Reserve your spot</h3>
-            <p>Fill out a short form. Classes cap at 20 dancers, so spots are first-come.</p>
-          </li>
-          <li>
-            <span class="step-num">3</span>
-            <h3>Pay & show up</h3>
-            <p>Choose Venmo or CashApp. Payment due before the first class.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="schedule" aria-labelledby="schedule-heading">
-      <div class="container">
-        <h2 id="schedule-heading">Schedule</h2>
-        <p class="section-sub">Live spot counts. <a href="enroll.html">Head to enrollment</a> to book.</p>
-        <div id="schedule-grid" class="schedule-grid" aria-live="polite">
-          <!-- cards rendered by app.js -->
-          <div class="schedule-loading">Loading class availability…</div>
-        </div>
-        <div class="schedule-cta">
-          <a class="btn btn-primary btn-lg" href="enroll.html">Enroll now</a>
-        </div>
+    <section class="section section--center" id="schedule" aria-labelledby="sched-title">
+      <p class="eyebrow">Six sessions</p>
+      <h2 class="section__title" id="sched-title">Pick your Mondays.</h2>
+      <div id="schedule-grid" class="schedule-grid" aria-live="polite">
+        <div class="schedule-loading">Loading class availability…</div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p><strong>Jessica Quinn</strong> · Summer Dance Intensives</p>
-      <p>4227 Center St, Deer Park TX 77536 · Mondays 1–3 PM</p>
-      <p class="muted">Questions? Reach out before enrolling and we'll get back to you.</p>
+    <div class="footer-wordmark">
+      <span class="footer-wordmark__top">JESSICA</span>
+      <span class="footer-wordmark__bottom">Quinn</span>
     </div>
+    <p class="footer-tag">Dance Intense · Deer Park, TX</p>
   </footer>
 
   <script src="config.js"></script>
