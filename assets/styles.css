@@ -1,5 +1,5 @@
 /* ============================================================
-   Jessica Quinn — Dance Intense
+   Jessica Quinn — Summer Dance Intensives
    Midnight Coral brand system. Mobile-first.
    ============================================================ */
 
@@ -905,6 +905,14 @@ select.form-input option {
 
   .class-option { padding: 14px 16px; grid-template-columns: 20px 56px 1fr auto; gap: 12px; }
   .opt-day-num { font-size: 26px; }
+}
+
+@media (min-width: 640px) {
+  .eyebrow { font-size: 12px; letter-spacing: 0.18em; }
+
+  .wordmark--mini .wordmark__top { font-size: 11px; letter-spacing: 4px; }
+  .wordmark--mini .wordmark__rule { width: 32px; }
+  .wordmark--mini .wordmark__bottom { font-size: 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
