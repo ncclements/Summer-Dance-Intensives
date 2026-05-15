@@ -283,7 +283,8 @@ function sendConfirmationEmail_(b, total, enrollmentId) {
 
   GmailApp.sendEmail(b.parentEmail, 'Enrollment confirmed — Summer Dance Intensives', plain, {
     htmlBody: html,
-    name: 'Jessica Quinn — Summer Dance Intensives'
+    name: 'Jessica Quinn — Summer Dance Intensives',
+    replyTo: props_('JESSICA_EMAIL')
   });
 }
 
