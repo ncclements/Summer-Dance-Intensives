@@ -1,0 +1,225 @@
+/* ============================================================
+   Jessica Quinn — Summer Dance Intensives
+   Shared flyer styles (print + social).
+   Loads after styles.css to inherit tokens and base.
+   ============================================================ */
+
+.flyer {
+  background: var(--navy-deep);
+  color: var(--cream);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* ----- Hero ----- */
+.flyer__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.flyer__mark {
+  display: block;
+  width: auto;
+}
+.flyer__eyebrow {
+  margin: 14px 0 12px;
+}
+.flyer__headline {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.05;
+  margin: 0;
+  color: var(--cream);
+  letter-spacing: -0.005em;
+}
+.flyer__headline .accent {
+  display: block;
+  font-style: italic;
+  color: var(--coral);
+}
+.flyer__tagline {
+  font-family: var(--font-sans);
+  color: var(--cream);
+  max-width: 36ch;
+  margin: 16px auto 0;
+  line-height: 1.55;
+}
+
+/* ----- Info grid (2x2) ----- */
+.flyer__info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 0.5px solid var(--border-12);
+  border-bottom: 0.5px solid var(--border-12);
+}
+.flyer__info > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  padding: 14px 12px;
+}
+.flyer__info > div:nth-child(2n) { border-left: 0.5px solid var(--border-12); }
+.flyer__info > div:nth-child(n+3) { border-top: 0.5px solid var(--border-12); }
+.flyer__info-value {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--cream);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* ----- Schedule ----- */
+.flyer__schedule { display: flex; flex-direction: column; }
+.flyer__schedule-eyebrow { text-align: center; }
+.flyer__schedule-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  text-align: center;
+  margin: 8px 0 16px;
+  color: var(--cream);
+  line-height: 1.15;
+}
+.flyer__schedule-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.flyer-card {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  background: var(--surface-08);
+  border: 0.5px solid var(--border-12);
+  border-radius: 8px;
+}
+.flyer-card__day-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.flyer-card__day {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--coral);
+  line-height: 1;
+}
+.flyer-card__month {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blush-tan);
+  margin-top: 4px;
+}
+.flyer-card__topic {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--cream);
+  line-height: 1.25;
+}
+
+/* ----- QR card (cream background) ----- */
+.flyer__qr {
+  background: var(--cream);
+  color: var(--navy-deep);
+  border-radius: 12px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 18px;
+  align-items: center;
+}
+.flyer__qr-canvas {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.flyer__qr-canvas canvas,
+.flyer__qr-canvas img {
+  display: block;
+}
+.flyer__qr-text { min-width: 0; }
+.flyer__qr-eyebrow {
+  color: var(--coral);
+  margin: 0 0 6px;
+}
+.flyer__qr-headline {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--navy-deep);
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+.flyer__qr-url {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: rgba(11, 31, 58, 0.7);
+  margin: 0;
+  word-break: break-all;
+}
+
+/* ----- Footer signature ----- */
+.flyer__footer {
+  text-align: center;
+  border-top: 0.5px solid var(--border-12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.flyer__footer-top {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--cream);
+}
+.flyer__footer-bottom {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--coral);
+}
+.flyer__footer-tag {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--blush-tan);
+  margin-top: 8px;
+}
+
+/* ----- Tool chrome (around the flyer itself, screen only) ----- */
+.flyer-tools {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 16px 0;
+}
+.flyer-tools__tip,
+.flyer-tools__note {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--blush-tan);
+  text-align: center;
+  margin: 0;
+  max-width: 480px;
+}
+.flyer-tools__note strong { color: var(--cream); font-weight: 500; }
+
+.flyer-frame {
+  display: flex;
+  justify-content: center;
+  padding: 24px 16px;
+}
