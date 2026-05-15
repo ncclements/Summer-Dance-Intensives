@@ -8,10 +8,8 @@
  * Required Script Properties (Project Settings → Script properties):
  *   SHEET_ID         The Google Sheet's ID (from its URL)
  *   JESSICA_EMAIL    Where to send the "new enrollment" notification
- *   PAYPAL_HANDLE    e.g. "jessicaquinn"        (no leading paypal.me/)
  *   VENMO_HANDLE     e.g. "JessicaQuinn"        (no leading @)
  *   CASHAPP_HANDLE   e.g. "JessicaQuinn"        (no leading $)
- *   ZELLE_CONTACT    Email or phone for Zelle
  *
  * Sheet columns (row 1 must be the header):
  *   Timestamp | Student Name | Grade | Parent Name | Email | Phone |
@@ -236,13 +234,10 @@ function sendNotificationEmail_(b, total, enrollmentId) {
 }
 
 function sendConfirmationEmail_(b, total, enrollmentId) {
-  var paypal  = propsOptional_('PAYPAL_HANDLE');
   var venmo   = propsOptional_('VENMO_HANDLE');
   var cashapp = propsOptional_('CASHAPP_HANDLE');
-  var zelle   = propsOptional_('ZELLE_CONTACT');
 
   var note = encodeURIComponent('Dance Intensive - ' + b.studentName);
-  var paypalUrl  = paypal  ? 'https://paypal.me/' + encodeURIComponent(paypal) + '/' + total : '';
   var venmoUrl   = venmo   ? 'https://venmo.com/?txn=pay&audience=public&recipients=' + encodeURIComponent(venmo) + '&amount=' + total + '&note=' + note : '';
   var cashappUrl = cashapp ? 'https://cash.app/$' + encodeURIComponent(cashapp) + '/' + total : '';
 
@@ -251,11 +246,8 @@ function sendConfirmationEmail_(b, total, enrollmentId) {
   }).join('');
 
   var payRows = '';
-  if (paypalUrl)  payRows += payRow_('PayPal',  paypalUrl,  'paypal.me/' + paypal);
   if (venmoUrl)   payRows += payRow_('Venmo',   venmoUrl,   '@' + venmo);
   if (cashappUrl) payRows += payRow_('CashApp', cashappUrl, '$' + cashapp);
-  if (zelle)      payRows += '<tr><td style="padding:8px 0;"><strong>Zelle:</strong></td>' +
-                             '<td style="padding:8px 0;">' + escapeHtml_(zelle) + ' <em style="color:#666;">(send from your bank app, include student name in memo)</em></td></tr>';
 
   var html =
     '<div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:#2A2A2A; max-width:560px; margin:0 auto; padding:24px;">' +
@@ -283,10 +275,8 @@ function sendConfirmationEmail_(b, total, enrollmentId) {
     'Classes:\n' + b.classes.map(function (d) { return '  - ' + d + ' (' + (TOPIC_BY_DATE[d] || '') + ')'; }).join('\n') + '\n\n' +
     'Total due: $' + total + '\n\n' +
     'Pay before the first class:\n' +
-    (paypalUrl  ? '  PayPal:  ' + paypalUrl + '\n'  : '') +
     (venmoUrl   ? '  Venmo:   ' + venmoUrl + '\n'   : '') +
     (cashappUrl ? '  CashApp: ' + cashappUrl + '\n' : '') +
-    (zelle      ? '  Zelle:   ' + zelle + ' (include student name in memo)\n' : '') +
     '\n4227 Center St, Deer Park TX 77536\nMondays, 1:00 – 3:00 PM\n\n' +
     'Enrollment ID: ' + enrollmentId + '\n— Jessica';
 
@@ -318,10 +308,8 @@ function escapeHtml_(s) {
 function _testSetup() {
   console.log('SHEET_ID present:',      !!propsOptional_('SHEET_ID'));
   console.log('JESSICA_EMAIL present:', !!propsOptional_('JESSICA_EMAIL'));
-  console.log('PAYPAL_HANDLE:',         propsOptional_('PAYPAL_HANDLE'));
   console.log('VENMO_HANDLE:',          propsOptional_('VENMO_HANDLE'));
   console.log('CASHAPP_HANDLE:',        propsOptional_('CASHAPP_HANDLE'));
-  console.log('ZELLE_CONTACT:',         propsOptional_('ZELLE_CONTACT'));
   console.log('Sheet first row:',       getSheet_().getRange(1, 1, 1, 12).getValues()[0]);
   console.log('Current counts:',        countEnrollments_());
 }

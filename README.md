@@ -5,7 +5,7 @@ Hosted on GitHub Pages, backed by a Google Sheet via Google Apps Script.
 
 - **Front end**: plain HTML/CSS/JS — no build step, no frameworks.
 - **Back end**: one Apps Script web app that reads/writes a Google Sheet and sends email.
-- **Payments**: link-based (PayPal / Venmo / CashApp / Zelle). No payment API integration.
+- **Payments**: link-based (Venmo / CashApp). No payment API integration.
 
 ---
 
@@ -66,10 +66,8 @@ In the Apps Script editor: **Project Settings (gear icon) → Script properties 
 |---|---|---|
 | `SHEET_ID` | The sheet's ID (from step 2) | `1AbC...xyz` |
 | `JESSICA_EMAIL` | Where to notify on new enrollments | `jessica@example.com` |
-| `PAYPAL_HANDLE` | PayPal.me username, no slash | `jessicaquinn` |
 | `VENMO_HANDLE` | Venmo username, no `@` | `JessicaQuinn` |
 | `CASHAPP_HANDLE` | $cashtag without the `$` | `JessicaQuinn` |
-| `ZELLE_CONTACT` | Email or phone you receive Zelle at | `jessica@example.com` |
 
 > Tip: in the Apps Script editor, select the `_testSetup` function from the dropdown and click **Run** once. The Execution log will confirm all properties are present and show your sheet header row. You'll be asked to authorize the script the first time.
 
@@ -90,10 +88,8 @@ Open `config.js` (your local copy from step 1) and fill in real values:
 ```js
 window.CONFIG = {
   APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfy.../exec',
-  PAYPAL_HANDLE:   'jessicaquinn',
   VENMO_HANDLE:    'JessicaQuinn',
   CASHAPP_HANDLE:  'JessicaQuinn',
-  ZELLE_CONTACT:   'jessica@example.com',
   INSTRUCTOR_NAME: 'Jessica Quinn',
   INSTRUCTOR_CONTACT_EMAIL: 'jessica@example.com'
 };
@@ -107,10 +103,8 @@ GitHub Pages won't have your local `config.js`. The deploy workflow synthesizes 
 In GitHub: **Settings → Secrets and variables → Actions → New repository secret**. Add:
 
 - `APPS_SCRIPT_URL`
-- `PAYPAL_HANDLE`
 - `VENMO_HANDLE`
 - `CASHAPP_HANDLE`
-- `ZELLE_CONTACT`
 - `INSTRUCTOR_CONTACT_EMAIL`
 
 (Same values as `config.js`, minus `INSTRUCTOR_NAME` which is hard-coded in the workflow.)
@@ -131,7 +125,7 @@ Watch the Actions tab. When the workflow finishes (~1 min), your site is live at
 - Load the site, confirm schedule counts render.
 - Submit a fake enrollment with your own email.
 - Confirm:
-  - You receive the confirmation email (with working PayPal/Venmo/CashApp links).
+  - You receive the confirmation email (with working Venmo/CashApp links).
   - Jessica receives the notification email.
   - A new row appears in the sheet.
   - The confirmation page shows the summary + payment buttons.
@@ -145,7 +139,7 @@ Watch the Actions tab. When the workflow finishes (~1 min), your site is live at
 Open the Google Sheet. Most-recent enrollments at the bottom.
 
 ### Mark an enrollment as paid
-In the sheet, edit the **Paid?** column to `TRUE` (and optionally fill in **Payment Method**: `PayPal`, `Venmo`, `CashApp`, `Zelle`). The form doesn't read these back; they're just for your records.
+In the sheet, edit the **Paid?** column to `TRUE` (and optionally fill in **Payment Method**: `Venmo`, `CashApp`). The form doesn't read these back; they're just for your records.
 
 ### Handle a cancellation
 Either:
@@ -167,7 +161,7 @@ Apps Script's `GmailApp` has a 1,500-email/day limit on consumer Gmail accounts.
 
 ## Known limitations
 
-- **Payments are not verified.** The site directs people to PayPal/Venmo/CashApp/Zelle but has no way to know if they actually paid. Jessica reconciles this manually by checking her accounts and marking the **Paid?** column. This is fine at this scale; it would not be at 500 dancers.
+- **Payments are not verified.** The site directs people to Venmo/CashApp but has no way to know if they actually paid. Jessica reconciles this manually by checking her accounts and marking the **Paid?** column. This is fine at this scale; it would not be at 500 dancers.
 - **Spot counts are eventually consistent.** The sheet read happens on every GET. If two people POST within the same second, `LockService` serializes them so the cap is enforced — but two people *loading* the page simultaneously will both see the same "X spots left" until one submits.
 - **No login / no account system.** Each enrollment is a one-shot form submission. There's no "view my enrollments" page. If a parent needs to add a class later, they re-enroll for the additional date.
 - **No refund automation.** Cancellations + refunds are manual.

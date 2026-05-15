@@ -80,13 +80,11 @@
   function buildPaymentLinks(total, studentName) {
     const note = 'Dance Intensive - ' + (studentName || '');
     return {
-      paypal:  'https://paypal.me/' + encodeURIComponent(CFG.PAYPAL_HANDLE || '') + '/' + total,
       venmo:   'https://venmo.com/?txn=pay&audience=public&recipients=' +
                encodeURIComponent(CFG.VENMO_HANDLE || '') +
                '&amount=' + total +
                '&note=' + encodeURIComponent(note),
-      cashapp: 'https://cash.app/$' + encodeURIComponent(CFG.CASHAPP_HANDLE || '') + '/' + total,
-      zelle:   CFG.ZELLE_CONTACT || ''
+      cashapp: 'https://cash.app/$' + encodeURIComponent(CFG.CASHAPP_HANDLE || '') + '/' + total
     };
   }
 
@@ -352,31 +350,14 @@
     // Wire payment links
     const links = buildPaymentLinks(enrollment.total, enrollment.studentName);
 
-    const paypalEl  = $('#pay-paypal');
     const venmoEl   = $('#pay-venmo');
     const cashappEl = $('#pay-cashapp');
 
-    paypalEl.href  = links.paypal;
     venmoEl.href   = links.venmo;
     cashappEl.href = links.cashapp;
 
-    $('[data-handle="paypal"]').textContent  = CFG.PAYPAL_HANDLE  || '—';
     $('[data-handle="venmo"]').textContent   = CFG.VENMO_HANDLE   || '—';
     $('[data-handle="cashapp"]').textContent = CFG.CASHAPP_HANDLE || '—';
-    $('#zelle-contact').textContent          = CFG.ZELLE_CONTACT  || '—';
-
-    // Zelle copy-to-clipboard
-    $('#zelle-copy').addEventListener('click', async () => {
-      const btn = $('#zelle-copy');
-      const original = btn.textContent;
-      try {
-        await navigator.clipboard.writeText(CFG.ZELLE_CONTACT || '');
-        btn.textContent = 'Copied!';
-      } catch (e) {
-        btn.textContent = 'Press & hold to copy';
-      }
-      setTimeout(() => { btn.textContent = original; }, 2000);
-    });
   }
 
   // ---- Boot -------------------------------------------------------------
