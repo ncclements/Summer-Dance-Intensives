@@ -102,14 +102,15 @@ function doPost(e) {
     var enrollmentId = buildEnrollmentId_();
     var total = body.classes.length * PRICE_PER_CLASS;
     var now = new Date();
+    var formattedPhone = formatPhone_(body.parentPhone);
     var row = [];
     row[COL.TIMESTAMP - 1] = now;
-    row[COL.STUDENT   - 1] = body.studentName;
-    row[COL.GRADE     - 1] = body.grade;
-    row[COL.PARENT    - 1] = body.parentName;
-    row[COL.EMAIL     - 1] = body.parentEmail;
-    row[COL.PHONE     - 1] = body.parentPhone;
-    row[COL.CLASSES   - 1] = body.classes.join(', ');
+    row[COL.STUDENT   - 1] = escapeForSheet_(body.studentName);
+    row[COL.GRADE     - 1] = escapeForSheet_(body.grade);
+    row[COL.PARENT    - 1] = escapeForSheet_(body.parentName);
+    row[COL.EMAIL     - 1] = escapeForSheet_(body.parentEmail);
+    row[COL.PHONE     - 1] = escapeForSheet_(formattedPhone);
+    row[COL.CLASSES   - 1] = escapeForSheet_(body.classes.join(', '));
     row[COL.TOTAL     - 1] = total;
     row[COL.METHOD    - 1] = '';
     row[COL.PAID      - 1] = false;
@@ -300,6 +301,22 @@ function escapeHtml_(s) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+function formatPhone_(raw) {
+  var digits = String(raw || '').replace(/\D/g, '');
+  if (digits.length === 11 && digits.charAt(0) === '1') digits = digits.slice(1);
+  if (digits.length === 10) {
+    return '(' + digits.slice(0, 3) + ') ' + digits.slice(3, 6) + '-' + digits.slice(6);
+  }
+  return digits;
+}
+
+// Prevent Sheets from interpreting user-supplied text as a formula.
+function escapeForSheet_(val) {
+  var s = String(val == null ? '' : val);
+  if (/^[=+\-@]/.test(s)) return "'" + s;
+  return s;
 }
 
 // ============================================================
